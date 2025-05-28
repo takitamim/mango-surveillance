@@ -1,0 +1,24 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Surveillance Record Details - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+        {% if record %}
+            <h1 class="text-2xl font-bold text-green-600 mb-4">Surveillance Record Details</h1>
+            <p><strong>Plant:</strong> {{ record.plant }}</p>
+            <p><strong>Date:</strong> {{ record.surveillance_date }}</p>
+            <p><strong>Pest/Disease:</strong> {{ record.pest_or_disease }}</p>
+            <p><strong>Plant Part:</strong> {{ record.plant_part }}</p>
+            <p><strong>Severity:</strong> {{ record.severity }}</p>
+            <p><strong>Notes:</strong> {{ record.notes|default:"No notes" }}</p>
+            <div class="mt-4">
+                <a href="{% url 'surveillance:record_update' record.pk %}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Edit</a>
+                <a href="{% url 'surveillance:record_delete' record.pk %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 ml-2">Delete</a>
+                <a href="{% url 'surveillance:record_list' %}" class="text-gray-600 hover:underline ml-2">Back to List</a>
+            </div>
+        {% else %}
+            <h1 class="text-2xl font-bold text-red-600 mb-4">Record Not Found</h1>
+            <p>The requested surveillance record does not exist.</p>
+            <a href="{% url 'surveillance:record_list' %}" class="text-gray-600 hover:underline">Back to List</a>
+        {% endif %}
+    </div>
+{% endblock %}

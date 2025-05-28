@@ -1,0 +1,13 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Delete Surveillance Record - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+        <h1 class="text-2xl font-bold text-green-600 mb-4">Delete Surveillance Record</h1>
+        <p>Are you sure you want to delete the record for "{{ record.plant }}" on {{ record.surveillance_date }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Confirm</button>
+            <a href="{% url 'surveillance:record_list' %}" class="text-gray-600 hover:underline ml-4">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

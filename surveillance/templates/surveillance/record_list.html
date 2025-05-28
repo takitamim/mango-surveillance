@@ -1,0 +1,44 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Surveillance Records - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-green-600 mb-4">Surveillance Records</h1>
+        <div class="flex justify-between items-center mb-4">
+            <a href="{% url 'surveillance:record_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Record</a>
+            <form method="get" class="flex items-center">
+                <input type="text" name="pest" placeholder="Search by pest/disease" class="form-input p-2 border rounded-l" value="{{ request.GET.pest }}">
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-r hover:bg-green-700">Search</button>
+            </form>
+        </div>
+        <table class="w-full mt-4 border-collapse">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border p-2">Plant</th>
+                    <th class="border p-2">Date</th>
+                    <th class="border p-2">Pest/Disease</th>
+                    <th class="border p-2">Plant Part</th>
+                    <th class="border p-2">Severity</th>
+                    <th class="border p-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td class="border p-2">{{ record.plant }}</td>
+                        <td class="border p-2">{{ record.surveillance_date }}</td>
+                        <td class="border p-2">{{ record.pest_or_disease }}</td>
+                        <td class="border p-2">{{ record.plant_part }}</td>
+                        <td class="border p-2">{{ record.severity }}</td>
+                        <td class="border p-2">
+                            <a href="{% url 'surveillance:record_detail' record.pk %}" class="text-blue-600 hover:underline">View</a>
+                            <a href="{% url 'surveillance:record_update' record.pk %}" class="text-yellow-600 hover:underline">Edit</a>
+                            <a href="{% url 'surveillance:record_delete' record.pk %}" class="text-red-600 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="6" class="border p-2 text-center">No records found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

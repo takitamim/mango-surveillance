@@ -1,0 +1,53 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Home - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-green-600 mb-4">Welcome to Mango Surveillance</h1>
+        <p class="text-gray-700 mb-4">This web application helps growers monitor and manage pest and disease surveillance for mango plants. Use the navigation above to view growers, plants, or surveillance records.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-green-100 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold">Growers</h2>
+                <p>Manage grower information.</p>
+                <a href="{% url 'surveillance:grower_list' %}" class="text-green-600 hover:underline">View Growers</a>
+            </div>
+            <div class="bg-green-100 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold">Plants</h2>
+                <p>Track plant details.</p>
+                <a href="{% url 'surveillance:plant_list' %}" class="text-green-600 hover:underline">View Plants</a>
+            </div>
+            <div class="bg-green-100 p-4 rounded-lg">
+                <h2 class="text-xl font-semibold">Records</h2>
+                <p>Record surveillance data.</p>
+                <a href="{% url 'surveillance:record_list' %}" class="text-green-600 hover:underline">View Records</a>
+            </div>
+        </div>
+        <h2 class="text-2xl font-bold text-green-600 mb-4">Severity Distribution</h2>
+        <canvas id="severityChart" class="mt-4 max-w-md mx-auto"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('severityChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Low', 'Medium', 'High'],
+                    datasets: [{
+                        data: {{ severity_counts|safe }},
+                        backgroundColor: ['#34D399', '#FBBF24', '#EF4444']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Surveillance Records by Severity'
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Plants - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold text-green-600 mb-4">Plants</h1>
+        <a href="{% url 'surveillance:plant_create' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Plant</a>
+        <table class="w-full mt-4 border-collapse">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border p-2">Grower</th>
+                    <th class="border p-2">Plant Type</th>
+                    <th class="border p-2">Location</th>
+                    <th class="border p-2">Planting Date</th>
+                    <th class="border p-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in plants %}
+                    <tr>
+                        <td class="border p-2">{{ plant.grower.name }}</td>
+                        <td class="border p-2">{{ plant.plant_type }}</td>
+                        <td class="border p-2">{{ plant.location }}</td>
+                        <td class="border p-2">{{ plant.planting_date }}</td>
+                        <td class="border p-2">
+                            <a href="{% url 'surveillance:plant_detail' plant.pk %}" class="text-blue-600 hover:underline">View</a>
+                            <a href="{% url 'surveillance:plant_update' plant.pk %}" class="text-yellow-600 hover:underline">Edit</a>
+                            <a href="{% url 'surveillance:plant_delete' plant.pk %}" class="text-red-600 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="border p-2 text-center">No plants found.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

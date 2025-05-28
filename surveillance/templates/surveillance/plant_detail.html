@@ -1,0 +1,16 @@
+{% extends 'surveillance/base.html' %}
+{% block title %}Plant Details - Mango Surveillance{% endblock %}
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+        <h1 class="text-2xl font-bold text-green-600 mb-4">Plant Details</h1>
+        <p><strong>Grower:</strong> {{ plant.grower.name }}</p>
+        <p><strong>Plant Type:</strong> {{ plant.plant_type }}</p>
+        <p><strong>Location:</strong> {{ plant.location }}</p>
+        <p><strong>Planting Date:</strong> {{ plant.planting_date }}</p>
+        <div class="mt-4">
+            <a href="{% url 'surveillance:plant_update' plant.pk %}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Edit</a>
+            <a href="{% url 'surveillance:plant_delete' plant.pk %}" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 ml-2">Delete</a>
+            <a href="{% url 'surveillance:plant_list' %}" class="text-gray-600 hover:underline ml-2">Back to List</a>
+        </div>
+    </div>
+{% endblock %}
