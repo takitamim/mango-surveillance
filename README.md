@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mango Surveillance Website
 
 This is a Django-based web application for mango pest and disease surveillance, allowing growers to manage growers, plants, and surveillance records. Follow these instructions to set up, run, and push the project to your GitHub repository.
@@ -118,3 +119,6 @@ To version-control the project, push it to your GitHub repository using these co
 - **Responsive UI**: Built with Tailwind CSS for a user-friendly interface.
 
 For issues, contact [your name/email].
+=======
+# mango-surveillance
+>>>>>>> 0e0d108f58a3b624b4990a7971f4e823a2167dfd
